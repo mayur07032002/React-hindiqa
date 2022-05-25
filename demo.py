@@ -1,7 +1,7 @@
 import requests
 
 data = {
-	'context' : 'my name is mayur',
+	'context' : 'my name is k',
 	'question' : 'What is my name?'
 }
 
