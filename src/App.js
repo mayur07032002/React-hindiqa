@@ -1,49 +1,53 @@
-import React from 'react';
-import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
 
-function App(){
-    
-    
-    const fetchdata = () => {
-        
-        axios.get("https://www.boredapi.com/api/activity")
-        .then((res)=>{
-            console.log(res);
-        })
-        
-    }
-    const user = {
-        context:"my name is mayur",
-        question:"what is my name"
+function App() {
+  
+  const [context,setpara] = useState(""); 
+  const [question,setques] = useState("");
+//   const [answer,setans] = useState("");
+  // let answer = "";
+
+  const handleSubmit = async (event) => {
+    const formData = new FormData();
+      formData.append('context', context);
+      formData.append('question', question);
+    event.preventDefault();
+
+    const config = {     
+    headers: { 'content-type': 'multipart/form-data' }
     }
 
-    const createpost = ()=>{
-       
-        axios.post('https://hindi-qa.herokuapp.com/',user)
-            .then((res)=>{
-                console.log(res.data)
-            })
-    }
-    return(
-        <>
-        <div className='container my-3'>
-        <form>
-            <div className="mb-3">
-                <label className="form-label">context</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                <div id="emailHelp" className="form-text">.</div>
-            </div>
-            <div className="mb-2">
-                <label  className="form-label">question</label>
-                <input type="password" className="form-control" id="exampleInputPassword1"/>
-            </div>
-            <button type="submit" className="btn btn-primary" onClick={createpost}>Submit</button><br/><br/>
-            <button type="submit" className="btn btn-primary" onClick={fetchdata}>Submit</button>
-            </form>
-        </div>
-        </>
-    )
+    axios({
+      method: 'post',
+      // url: 'http://127.0.0.1:8000/',
+      url : 'https://hindi-qa.herokuapp.com/',
+      data: formData, 
+      config : config
+    })
+    .then((response) => {
+      console.log(response.data)
+    //   answer = response.data['answer'];
+    })
+    .catch((error) => {
+      //error.data.error.message
+      console.log(error)
+    });
+  }
+  
+  return (
+    <div className="App">
+      <h1>Question - Answering</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="para" value={context} onChange={(e)=>{setpara(e.target.value)}} placeholder='paragraph'></input> <br/> <br/>
+          <input type="text" name="ques" value={question} onChange={(e)=>{setques(e.target.value)}} placeholder='question'></input> <br/> <br/>
+          <input type="submit" />
+        </form>
+      <p>{context}</p>
+      {/* <p onChange={(e)=>{setans(e.target.value)}} value = {answer}></p> */}
+    </div>
+  )
 }
 
 export default App;
