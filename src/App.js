@@ -7,7 +7,6 @@ function App() {
   const [context,setpara] = useState(""); 
   const [question,setques] = useState("");
   const [answer,setans] = useState("");
-  // let answer = "";
 
   const handleSubmit = async (event) => {
     const formData = new FormData();
@@ -32,7 +31,6 @@ function App() {
       setans("Predicted answer : " + response.data["answer"]);
     })
     .catch((error) => {
-      //error.data.error.message
       console.log(error)
     });
   }
