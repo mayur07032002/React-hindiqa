@@ -27,8 +27,9 @@ function App() {
       config : config
     })
     .then((response) => {
-      console.log(response.data)
-      answer = response.data['answer'];
+      console.log(response.data);
+      console.log(response.data["answer"]);
+      setans("Predicted answer : " + response.data["answer"]);
     })
     .catch((error) => {
       //error.data.error.message
@@ -42,10 +43,9 @@ function App() {
         <form onSubmit={handleSubmit}>
           <input type="text" name="para" value={context} onChange={(e)=>{setpara(e.target.value)}} placeholder='paragraph'></input> <br/> <br/>
           <input type="text" name="ques" value={question} onChange={(e)=>{setques(e.target.value)}} placeholder='question'></input> <br/> <br/>
-          <input type="submit" />
+          <input type="submit" value = "Predict"/>
         </form>
-      <p>{context}</p>
-      <p onChange={(e)=>{setans(e.target.value)}} value = {answer}></p>
+      <p >{answer}</p>
     </div>
   )
 }
