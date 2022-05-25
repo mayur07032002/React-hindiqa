@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/React-hindiqa/static/css/main.073c9b0a.css",
+    "main.js": "/React-hindiqa/static/js/main.0d8838f8.js",
+    "index.html": "/React-hindiqa/index.html",
+    "main.073c9b0a.css.map": "/React-hindiqa/static/css/main.073c9b0a.css.map",
+    "main.0d8838f8.js.map": "/React-hindiqa/static/js/main.0d8838f8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.0d8838f8.js"
+  ]
+}
