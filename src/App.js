@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <Router>
-
         <Header />
 
         <div className="main mb-3">

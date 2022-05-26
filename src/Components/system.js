@@ -1,6 +1,7 @@
 import '../App.css'
 import React, { useState } from 'react';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 function System() {
 
@@ -8,8 +9,10 @@ function System() {
   const [question, setques] = useState("");
   const [answer, setans] = useState("");
   const [attr, setattr] = useState("");
+  const [isloading, setloading] = useState(false);
 
   const handleSubmit = async (event) => {
+    setloading(true);
     const formData = new FormData();
     formData.append('context', context);
     formData.append('question', question);
@@ -28,13 +31,14 @@ function System() {
       config: config
     })
       .then((response) => {
-
+        console.log(response);
         let resp = response;
+        setloading(false);
         if (resp.data["error"] === false) {
           setans("Predicted answer : " + response.data["answer"]);
           setattr("success p-3");
         } else {
-          setans(response.data["answer"]);
+          setans(response.data["answer"] + ". Try reloading the page.");
           setattr("error p-3");
         }
 
@@ -55,21 +59,22 @@ function System() {
           <form onSubmit={handleSubmit}>
             <div className="container mb-3 my-5">
               <h5 className='text-start'>Enter paragraph</h5>
-              <textarea className="form-control" name="para" value={context} onChange={(e) => { setpara(e.target.value) }} id="exampleFormControlTextarea1" rows="3" placeholder="Paragraph"></textarea>
+              <textarea className="form-control" name="para" value={context} onChange={(e) => { setpara(e.target.value) }} id="exampleFormControlTextarea1" rows="3" placeholder="Paragraph" required></textarea>
             </div>
             <div className="container mb-3">
               <h5 className='text-start'>Enter Question</h5>
-              <input type="text" className="form-control" name="ques" value={question} onChange={(e) => { setques(e.target.value) }} id="exampleFormControlInput1" placeholder="Question" />
+              <input type="text" className="form-control" name="ques" value={question} onChange={(e) => { setques(e.target.value) }} id="exampleFormControlInput1" placeholder="Question" required/>
             </div>
 
             <div className="container mb-3">
-              <input type="submit" className="btn btn-primary" value="Predict" />
+              <input type="submit" className="btn btn-primary" value="Predict" disabled = {isloading} />
             </div>
-
+            
           </form>
-          <div className="container my-3 ">
-            <h5 className={`text-start ${attr}`}>{answer}</h5>
-          </div>
+          {isloading ? <Spinner/> : 
+          <div className="container my-3 answer rounded-3">
+            <h5 className={`text-start answer ${attr}`}>{answer}</h5>
+          </div>}
         </div>
       </div>
     </div>

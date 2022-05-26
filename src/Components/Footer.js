@@ -7,7 +7,7 @@ const Footer = () => {
             <footer className="mt-auto" id="footer">
                 <div className="container text-center pt-3">
                     <div className="credits">
-                        Created by <strong>Hardik</strong> and <strong>Lord Mayuri</strong>
+                        Created by <strong>Hardik</strong> and <strong>Mayur</strong>
                         <div className="copyright">
                             Made with ❤️ in <strong>India</strong>
                         </div>
